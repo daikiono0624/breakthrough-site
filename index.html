@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breakthrough | 分析型英語個別指導</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy-1: #071a33;
+      --navy-2: #0d2d57;
+      --navy-3: #173c6d;
+      --navy-4: #1f446f;
+      --gold: #c9a84c;
+      --gold-light: #e8d5a3;
+      --accent: #3569c8;
+      --bg: #f5f7fa;
+      --bg-soft: #eef2f8;
+      --white: #ffffff;
+      --text: #1a2e42;
+      --muted: #5a6e82;
+      --line: rgba(18, 46, 79, 0.1);
+      --shadow: 0 4px 20px rgba(8, 22, 42, 0.08);
+      --shadow-md: 0 8px 32px rgba(8, 22, 42, 0.12);
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: "Noto Sans JP", "Hiragino Sans", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ===== Layout ===== */
+    .container {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    @media (min-width: 768px) {
+      .container { max-width: 760px; }
+    }
+    @media (min-width: 1100px) {
+      .container { max-width: 1100px; }
+    }
+
+    /* ===== Header ===== */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: rgba(7, 26, 51, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      transition: background 0.3s;
+    }
+    .site-header.scrolled {
+      background: rgba(7, 26, 51, 0.98);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 12px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .brand-logo {
+      height: 36px;
+      width: auto;
+    }
+
+    /* ===== Hamburger Menu ===== */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      flex-shrink: 0;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Desktop nav */
+    .nav-desktop {
+      display: none;
+      gap: 24px;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.82);
+    }
+    .nav-desktop a:hover { color: #fff; }
+    @media (min-width: 900px) {
+      .nav-desktop { display: flex; }
+      .hamburger { display: none; }
+    }
+
+    /* Mobile drawer */
+    .nav-drawer {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0; bottom: 0;
+      background: rgba(7, 26, 51, 0.98);
+      z-index: 199;
+      padding: 32px 24px;
+      flex-direction: column;
+      gap: 0;
+      overflow-y: auto;
+    }
+    .nav-drawer.open { display: flex; }
+    .nav-drawer a {
+      display: block;
+      padding: 16px 0;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.88);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-weight: 500;
+    }
+    .nav-drawer a:last-child { border-bottom: none; }
+    .nav-drawer a:hover { color: var(--gold); }
+    .header-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 38px;
+      padding: 0 16px;
+      background: var(--gold);
+      color: var(--navy-1);
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: 0.2s;
+      flex-shrink: 0;
+    }
+    .header-cta:hover { background: #b8922e; }
+
+    /* ===== Hero ===== */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(160deg, #071a33 0%, #0d2d57 50%, #173c6d 100%);
+      padding-top: 64px;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 60px 0 80px;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 0.26em;
+      font-weight: 500;
+    }
+    .hero h1 {
+      color: rgba(255,255,255,0.96);
+      font-family: "Noto Serif JP", serif;
+      font-size: clamp(1.7rem, 7vw, 3.2rem);
+      line-height: 1.55;
+      margin-bottom: 24px;
+    }
+    .hero-divider {
+      width: 36px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 20px;
+    }
+    .hero-copy {
+      color: rgba(255,255,255,0.78);
+      font-size: 0.95rem;
+      line-height: 2;
+      margin-bottom: 32px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    @media (min-width: 480px) {
+      .hero-actions { flex-direction: row; flex-wrap: wrap; }
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border-radius: 8px;
+      transition: 0.25s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy-1);
+      box-shadow: 0 8px 24px rgba(201,168,76,0.3);
+    }
+    .btn-primary:hover { background: #b8922e; transform: translateY(-2px); }
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.9);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.14); transform: translateY(-2px); }
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .hero-chip {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.82);
+      font-size: 0.82rem;
+    }
+
+    /* ===== Sections ===== */
+    .section { padding: 72px 0; }
+    .section-white { background: #fff; }
+    .section-soft { background: var(--bg-soft); }
+    .section-navy { background: var(--navy-2); }
+
+    .section-kicker {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .section-title {
+      font-family: "Noto Serif JP", serif;
+      font-size: clamp(1.5rem, 5vw, 2.4rem);
+      line-height: 1.5;
+      color: #132d4a;
+      margin-bottom: 12px;
+    }
+    .section-lead {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.9;
+    }
+    .section-header { margin-bottom: 40px; }
+
+    /* ===== Cards ===== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 600px) {
+      .card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+      .card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 900px) {
+      .card-grid-4 { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .card-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e8f0fa, #d0e0f5);
+      color: var(--accent);
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .card h3 {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #193553;
+      margin-bottom: 10px;
+    }
+    .card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    /* ===== Analysis section ===== */
+    .analysis-section { background: var(--bg-soft); }
+    .analysis-tag {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+    .analysis-title {
+      font-family: "Noto Serif JP", serif;
+      font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+      color: #183654;
+      line-height: 1.55;
+      margin-bottom: 24px;
+    }
+    .analysis-copy {
+      color: #27425e;
+      font-size: 0.95rem;
+      line-height: 2;
+      margin-bottom: 32px;
+    }
+    .mindmap-wrap {
+      display: flex;
+      justify-content: center;
+    }
+    .mindmap {
+      width: 100%;
+      max-width: 480px;
+      height: auto;
+    }
+    @media (min-width: 900px) {
+      .analysis-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        align-items: center;
+      }
+      .analysis-copy { margin-bottom: 0; }
+    }
+    .mind-line { stroke: rgba(53,105,200,0.65); stroke-width: 2; fill: none; stroke-linecap: round; }
+    .mind-dot { fill: var(--accent); }
+    .mind-node { fill: #173c6d; filter: drop-shadow(0 8px 16px rgba(23,60,109,0.2)); }
+    .mind-center-ja { fill: #fff; font-size: 22px; font-weight: 700; text-anchor: middle; dominant-baseline: middle; }
+    .mind-center-en { fill: rgba(255,255,255,0.72); font-size: 11px; text-anchor: middle; dominant-baseline: middle; }
+    .mind-label { fill: #27425e; font-size: 13px; font-weight: 700; text-anchor: middle; }
+
+    /* ===== Achievements ===== */
+    .achievement-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 600px) {
+      .achievement-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .achievement-card {
+      background: linear-gradient(160deg, #fff 0%, #f5f9ff 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px 16px;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s;
+    }
+    .achievement-card:hover { transform: translateY(-3px); }
+    .achievement-label {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #edf3fb;
+      color: #2d5f9c;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .achievement-card h3 {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #183654;
+    }
+    .achievement-note {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.9;
+    }
+
+    /* ===== Pricing ===== */
+    .price-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    .price-head {
+      padding: 22px 24px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+    .price-head h3 {
+      font-size: 1.2rem;
+      color: #183654;
+    }
+    .price-sub {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .price-table th,
+    .price-table td {
+      padding: 16px 24px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.95rem;
+    }
+    .price-table th {
+      color: var(--muted);
+      font-weight: 500;
+      width: 40%;
+    }
+    .price-table td {
+      color: #183654;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .price-table tr:last-child th,
+    .price-table tr:last-child td { border-bottom: none; }
+    .price-note {
+      padding: 16px 24px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+    .payment-wrap {
+      padding: 18px 24px;
+      background: var(--bg-soft);
+    }
+    .payment-title {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 0.08em;
+    }
+    .payment-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .payment-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+      font-size: 0.85rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ===== CTA Section ===== */
+    .cta-section {
+      background: linear-gradient(160deg, #071a33 0%, #0d2d57 60%, #173c6d 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    .trial-kicker {
+      display: inline-block;
+      margin-bottom: 12px;
+      font-size: 0.72rem;
+      letter-spacing: 0.26em;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .trial-heading {
+      font-family: "Noto Serif JP", serif;
+      font-size: clamp(1.6rem, 5.5vw, 2.6rem);
+      color: rgba(255,255,255,0.96);
+      line-height: 1.55;
+      margin-bottom: 36px;
+    }
+    .trial-boxes {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .trial-box {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: var(--radius-sm);
+      padding: 18px 20px;
+      min-width: 100px;
+      text-align: center;
+    }
+    .trial-mini-label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .trial-box strong {
+      display: block;
+      color: rgba(255,255,255,0.92);
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+    .trial-btn {
+      background: var(--gold);
+      color: var(--navy-1);
+      padding: 16px 40px;
+      font-size: 1rem;
+      border-radius: 8px;
+      font-weight: 700;
+      box-shadow: 0 8px 24px rgba(201,168,76,0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .trial-btn:hover { background: #b8922e; transform: translateY(-2px); }
+    .trial-note {
+      margin-top: 14px;
+      color: rgba(255,255,255,0.58);
+      font-size: 0.82rem;
+    }
+
+    /* ===== FAQ ===== */
+    .faq-list { display: flex; flex-direction: column; gap: 10px; }
+    .faq-item {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #193553;
+      list-style: none;
+      gap: 12px;
+    }
+    .faq-question::-webkit-details-marker { display: none; }
+    .faq-icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #edf3fb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: 0.25s;
+    }
+    .faq-item[open] .faq-icon { background: var(--accent); color: #fff; transform: rotate(45deg); }
+    .faq-answer {
+      padding: 0 20px 18px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.9;
+      border-top: 1px solid rgba(53,105,200,0.1);
+      padding-top: 14px;
+    }
+
+    /* ===== Compare ===== */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 600px) {
+      .compare-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .compare-card {
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      box-shadow: var(--shadow);
+    }
+    .compare-card.other {
+      background: #f7f9fc;
+      border: 1px solid var(--line);
+    }
+    .compare-card.ours {
+      background: linear-gradient(160deg, #0d2d57, #173c6d);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .compare-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .compare-card.other h3 { color: #193553; }
+    .compare-card.ours h3 { color: #fff; border-color: rgba(255,255,255,0.12); }
+    .compare-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: 0.9rem;
+    }
+    .compare-item + .compare-item { border-top: 1px solid rgba(0,0,0,0.05); }
+    .compare-card.ours .compare-item + .compare-item { border-color: rgba(255,255,255,0.06); }
+    .compare-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      margin-top: 2px;
+    }
+    .compare-card.other .compare-icon { background: #e8edf4; color: #8a9ab0; }
+    .compare-card.ours .compare-icon { background: var(--gold); color: var(--navy-1); }
+    .compare-card.other .compare-text { color: var(--muted); }
+    .compare-card.ours .compare-text { color: rgba(255,255,255,0.88); }
+
+    /* ===== Flow ===== */
+    .flow-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    @media (min-width: 600px) {
+      .flow-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    }
+    @media (min-width: 900px) {
+      .flow-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .flow-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      margin-bottom: 12px;
+    }
+    @media (min-width: 600px) { .flow-item { margin-bottom: 0; } }
+    .flow-num {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy-2), var(--navy-3));
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .flow-content h3 {
+      font-size: 1rem;
+      color: #193553;
+      margin-bottom: 6px;
+    }
+    .flow-content p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* ===== Footer ===== */
+    .site-footer {
+      background: #071a33;
+      color: rgba(255,255,255,0.65);
+      padding: 32px 0;
+      font-size: 0.85rem;
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .footer-logo { height: 28px; width: auto; opacity: 0.85; }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.82rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.9); }
+    .footer-copy {
+      color: rgba(255,255,255,0.35);
+      font-size: 0.78rem;
+    }
+
+    /* ===== Reveal animation ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.08s; }
+    .delay-2 { transition-delay: 0.16s; }
+    .delay-3 { transition-delay: 0.24s; }
+    .delay-4 { transition-delay: 0.32s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, .reveal { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ===== Partnership badge ===== */
+    .partner-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.8rem;
+      margin-bottom: 20px;
+    }
+    .partner-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4caf7d;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Breakthrough">
+        <img src="logo.png" alt="Breakthroughロゴ" class="brand-logo">
+      </a>
+
+      <nav class="nav-desktop" aria-label="メインナビゲーション">
+        <a href="#problem">なぜ伸びないのか</a>
+        <a href="#about">指導の特徴</a>
+        <a href="#difference">違い</a>
+        <a href="#price">料金</a>
+        <a href="#faq">FAQ</a>
+        <a href="partner.html">提携先について</a>
+      </nav>
+
+      <a href="#trial" class="header-cta">無料体験</a>
+
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile drawer -->
+  <nav class="nav-drawer" id="navDrawer" aria-label="モバイルナビゲーション">
+    <a href="#problem" class="drawer-link">なぜ伸びないのか</a>
+    <a href="#about" class="drawer-link">指導の特徴</a>
+    <a href="#flow" class="drawer-link">授業の流れ</a>
+    <a href="#difference" class="drawer-link">一般的な塾との違い</a>
+    <a href="#price" class="drawer-link">料金</a>
+    <a href="#trial" class="drawer-link">無料体験</a>
+    <a href="#faq" class="drawer-link">FAQ</a>
+    <a href="partner.html" class="drawer-link" style="color: var(--gold);">提携先について</a>
+  </nav>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="partner-badge">
+        <span class="partner-badge-dot"></span>
+        みんなの教室と提携中
+      </div>
+      <span class="hero-eyebrow">ANALYTICAL ENGLISH TUTORING</span>
+      <h1>
+        頑張ったのになぜか伸びない<br>
+        そんな経験ありませんか？
+      </h1>
+      <div class="hero-divider"></div>
+      <p class="hero-copy">
+        原因は努力不足ではありません。<br>
+        「どこで・なぜつまずいているのか」が<br>
+        分からないまま勉強していることです。
+      </p>
+      <div class="hero-actions">
+        <a href="#trial" class="btn btn-primary">LINEで無料体験を申し込む</a>
+        <a href="#about" class="btn btn-secondary">指導の特徴を見る</a>
+      </div>
+      <div class="hero-chips">
+        <span class="hero-chip">苦手の原因を可視化</span>
+        <span class="hero-chip">一人ひとりに合わせた個別指導</span>
+        <span class="hero-chip">無料体験60分</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Problem ===== -->
+  <section class="section section-white" id="problem">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-kicker">PROBLEM</span>
+        <h2 class="section-title">こんな状態になっていませんか？</h2>
+      </div>
+      <div class="card-grid card-grid-3">
+        <article class="card reveal delay-1">
+          <div class="card-num">01</div>
+          <h3>単語は覚えているのに<br>読めない</h3>
+          <p>知識と読解処理が繋がっていない可能性があります。</p>
+        </article>
+        <article class="card reveal delay-2">
+          <div class="card-num">02</div>
+          <h3>文法はやったのに<br>使えない</h3>
+          <p>理解した内容を実際に使う力へ変換できていない状態です。</p>
+        </article>
+        <article class="card reveal delay-3">
+          <div class="card-num">03</div>
+          <h3>勉強しているのに<br>点数が伸びない</h3>
+          <p>今の課題と学習内容がずれていることがあります。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Reason ===== -->
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-kicker">REASON</span>
+        <h2 class="section-title">英語が伸びない本当の理由</h2>
+      </div>
+      <div class="card-grid card-grid-3">
+        <article class="card reveal delay-1">
+          <div class="card-num">01</div>
+          <h3>反復練習だけで<br>解決しようとしてしまう</h3>
+          <p>量を増やしても、ズレた勉強のままでは成果につながりにくくなります。</p>
+        </article>
+        <article class="card reveal delay-2">
+          <div class="card-num">02</div>
+          <h3>つまずきの原因が<br>分からない</h3>
+          <p>語彙・文法・構文・作文など、躓きの原因が曖昧だと改善も曖昧になります。</p>
+        </article>
+        <article class="card reveal delay-3">
+          <div class="card-num">03</div>
+          <h3>自分専用の対策に<br>なっていない</h3>
+          <p>同じ間違えでも、人それぞれ間違えの原因と改善方法が異なります。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== About ===== -->
+  <section class="section section-white" id="about">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-kicker">APPROACH</span>
+        <h2 class="section-title">Breakthroughの指導</h2>
+        <p class="section-lead">「なぜできないのか」を丁寧に分解し、一人ひとりに合わせた指導を行います。</p>
+      </div>
+      <div class="card-grid card-grid-3">
+        <article class="card reveal delay-1">
+          <div class="card-num">1</div>
+          <h3>診断</h3>
+          <p>今どこでつまずいているかを整理します。</p>
+        </article>
+        <article class="card reveal delay-2">
+          <div class="card-num">2</div>
+          <h3>分析</h3>
+          <p>苦手の原因を分解し、言語化します。</p>
+        </article>
+        <article class="card reveal delay-3">
+          <div class="card-num">3</div>
+          <h3>個別指導</h3>
+          <p>原因に合わせて、必要な内容を優先順位順にその分野の専門の教師が指導します。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Analysis ===== -->
+  <section class="section analysis-section" id="analysis-example">
+    <div class="container">
+      <div class="reveal">
+        <span class="analysis-tag">苦手分析とは？</span>
+        <h2 class="analysis-title">苦手分析を作文を例にすると</h2>
+      </div>
+      <div class="analysis-layout">
+        <div class="analysis-copy reveal delay-1">
+          Breakthroughでは従来の塾のような反復練習ではなく、苦手の原因から分析します。<br><br>
+          「作文が苦手」という一言でも、その原因はアイデアが出ない・日本語が整理できない・英語に変換できない・文法が苦手・単語の理解が追いついていないなど、様々な要因が考えられます。<br><br>
+          原因を特定してから対策することで、効率よく成果につながります。
+        </div>
+        <div class="mindmap-wrap reveal delay-2">
+          <svg class="mindmap" viewBox="0 0 480 400" xmlns="http://www.w3.org/2000/svg" aria-label="作文の苦手分析図">
+            <line class="mind-line" x1="240" y1="210" x2="210" y2="90"/>
+            <circle class="mind-dot" cx="210" cy="90" r="4"/>
+            <line class="mind-line" x1="240" y1="210" x2="310" y2="110"/>
+            <circle class="mind-dot" cx="310" cy="110" r="4"/>
+            <line class="mind-line" x1="240" y1="210" x2="360" y2="190"/>
+            <circle class="mind-dot" cx="360" cy="190" r="4"/>
+            <line class="mind-line" x1="240" y1="210" x2="330" y2="290"/>
+            <circle class="mind-dot" cx="330" cy="290" r="4"/>
+            <line class="mind-line" x1="240" y1="210" x2="250" y2="340"/>
+            <circle class="mind-dot" cx="250" cy="340" r="4"/>
+            <circle class="mind-node" cx="240" cy="210" r="46"/>
+            <text class="mind-center-ja" x="240" y="203">作文</text>
+            <text class="mind-center-en" x="240" y="224">Writing</text>
+            <text class="mind-label" x="205" y="52">
+              <tspan x="205" dy="0">アイデアが</tspan>
+              <tspan x="205" dy="20">出ない</tspan>
+            </text>
+            <text class="mind-label" x="340" y="78">
+              <tspan x="340" dy="0">日本語が</tspan>
+              <tspan x="340" dy="20">整理できない</tspan>
+            </text>
+            <text class="mind-label" x="418" y="172">
+              <tspan x="418" dy="0">英語に</tspan>
+              <tspan x="418" dy="20">変換できない</tspan>
+            </text>
+            <text class="mind-label" x="390" y="308">
+              <tspan x="390" dy="0">文法が</tspan>
+              <tspan x="390" dy="20">苦手</tspan>
+            </text>
+            <text class="mind-label" x="262" y="374">
+              <tspan x="262" dy="0">単語の理解が</tspan>
+              <tspan x="262" dy="20">追いついていない</tspan>
+            </text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Difference ===== -->
+  <section class="section section-white" id="difference">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-kicker">DIFFERENCE</span>
+        <h2 class="section-title">一般的な塾との違い</h2>
+      </div>
+      <div class="compare-grid">
+        <div class="compare-card other reveal delay-1">
+          <h3>一般的な塾</h3>
+          <div class="compare-item">
+            <span class="compare-icon">―</span>
+            <span class="compare-text">決まった進度で進む</span>
+          </div>
+          <div class="compare-item">
+            <span class="compare-icon">―</span>
+            <span class="compare-text">反復量を増やして対応する</span>
+          </div>
+          <div class="compare-item">
+            <span class="compare-icon">―</span>
+            <span class="compare-text">苦手の原因は本人任せになりやすい</span>
+          </div>
+        </div>
+        <div class="compare-card ours reveal delay-2">
+          <h3>Breakthrough</h3>
+          <div class="compare-item">
+            <span class="compare-icon">✓</span>
+            <span class="compare-text">今のつまずきに合わせて内容を設計</span>
+          </div>
+          <div class="compare-item">
+            <span class="compare-icon">✓</span>
+            <span class="compare-text">原因を分解してから対策する</span>
+          </div>
+          <div class="compare-item">
+            <span class="compare-icon">✓</span>
+            <span class="compare-text">努力が点数につながる状態を作る</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Achievement ===== -->
+  <section class="section section-soft" id="achievement">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-kicker">ACHIEVEMENT</span>
+        <h2 class="section-title">合格実績例</h2>
+        <p class="section-lead">一人ひとりの課題に合わせて指導した結果、英検・高校受験の両方で成果が出ています。</p>
+      </div>
+      <div class="achievement-grid">
+        <article class="achievement-card reveal delay-1">
+          <span class="achievement-label">英検実績</span>
+          <h3>小学６年生<br>英検準二級合格</h3>
+        </article>
+        <article class="achievement-card reveal delay-2">
+          <span class="achievement-label">英検実績</span>
+          <h3>中学１年生<br>英検二級合格</h3>
+        </article>
+        <article class="achievement-card reveal delay-3">
+          <span class="achievement-label">英検実績</span>
+          <h3>中学2年生<br>英検二級合格</h3>
+        </article>
+        <article class="achievement-card reveal delay-4">
+          <span class="achievement-label">高校受験実績</span>
+          <h3>大分県岩田高校合格</h3>
+        </article>
+        <article class="achievement-card reveal delay-1">
+          <span class="achievement-label">高校受験実績</span>
+          <h3>福岡県立北筑高校合格</h3>
+        </article>
+        <article class="achievement-card reveal delay-2">
+          <span class="achievement-label">その他</span>
+          <h3>など</h3>
+        </article>
+      </div>
+      <p class="achievement-note reveal delay-3">
+        生徒ごとに苦手の原因を分析し、必要な内容を絞って指導することで、着実な成果につなげています。
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== Price ===== -->
+  <section class="section section-white" id="price">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-kicker">PRICE</span>
+        <h2 class="section-title">料金表</h2>
+        <p class="section-lead">明確で分かりやすい料金設定です。入塾費・退塾費・教材費はかかりません。</p>
+      </div>
+      <div class="price-card reveal delay-1">
+        <div class="price-head">
+          <h3>1回60分コース</h3>
+          <p class="price-sub">オンライン（Zoom）にて実施</p>
+        </div>
+        <table class="price-table" aria-label="料金表">
+          <tbody>
+            <tr>
+              <th>月4回</th>
+              <td>8,800円</td>
+            </tr>
+            <tr>
+              <th>月8回</th>
+              <td>17,600円</td>
+            </tr>
+            <tr>
+              <th>月12回</th>
+              <td>26,400円</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="price-note">※入塾費・退塾費・教材費は一切かかりません</p>
+        <div class="payment-wrap">
+          <div class="payment-title">お支払い方法</div>
+          <div class="payment-list">
+            <span class="payment-chip">PayPay</span>
+            <span class="payment-chip">口座振り込み</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA / Trial ===== -->
+  <section class="section cta-section" id="trial">
+    <div class="container cta-inner">
+      <div class="reveal">
+        <span class="trial-kicker">FREE TRIAL</span>
+        <h2 class="trial-heading">
+          無料体験だけでも、<br>
+          原因が見えます。
+        </h2>
+      </div>
+      <div class="trial-boxes">
+        <div class="trial-box reveal delay-1">
+          <span class="trial-mini-label">時間</span>
+          <strong>約60分<br>zoom使用</strong>
+        </div>
+        <div class="trial-box reveal delay-2">
+          <span class="trial-mini-label">内容</span>
+          <strong>苦手分析</strong>
+        </div>
+        <div class="trial-box reveal delay-3">
+          <span class="trial-mini-label">提供</span>
+          <strong>解決プラン</strong>
+        </div>
+      </div>
+      <div class="reveal delay-2" style="text-align:center;">
+        <a href="#" class="trial-btn">体験を申し込む →</a>
+        <p class="trial-note">参加していただいて後悔しない60分にします</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Flow ===== -->
+  <section class="section section-white" id="flow">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-kicker">FLOW</span>
+        <h2 class="section-title">LINE申込の流れ</h2>
+      </div>
+      <div class="flow-grid">
+        <div class="flow-item reveal delay-1">
+          <div class="flow-num">1</div>
+          <div class="flow-content">
+            <h3>友だち追加</h3>
+            <p>LINEを追加します。</p>
+          </div>
+        </div>
+        <div class="flow-item reveal delay-2">
+          <div class="flow-num">2</div>
+          <div class="flow-content">
+            <h3>メッセージ送信</h3>
+            <p>「無料体験希望」と送ります。</p>
+          </div>
+        </div>
+        <div class="flow-item reveal delay-3">
+          <div class="flow-num">3</div>
+          <div class="flow-content">
+            <h3>日時調整</h3>
+            <p>希望日時と学年を確認して日程を調整します。</p>
+          </div>
+        </div>
+        <div class="flow-item reveal delay-4">
+          <div class="flow-num">4</div>
+          <div class="flow-content">
+            <h3>無料体験</h3>
+            <p>60分で現状と改善の方向性を整理します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section section-soft" id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-kicker">FAQ</span>
+        <h2 class="section-title">よくある質問</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item reveal delay-1" open>
+          <summary class="faq-question">
+            どこで授業をしますか？
+            <span class="faq-icon">+</span>
+          </summary>
+          <div class="faq-answer">当塾はオンライン（Zoom）での授業を実施しております。</div>
+        </details>
+        <details class="faq-item reveal delay-2">
+          <summary class="faq-question">
+            どんな生徒に向いていますか？
+            <span class="faq-icon">+</span>
+          </summary>
+          <div class="faq-answer">英語を頑張っているのに伸び悩んでいる方や英語力を伸ばしたい方に向いています。また、当塾は英検対策を一番の得意分野としておりますので英検を取得されたい方にもおすすめです。</div>
+        </details>
+        <details class="faq-item reveal delay-3">
+          <summary class="faq-question">
+            安さの秘訣を教えてください
+            <span class="faq-icon">+</span>
+          </summary>
+          <div class="faq-answer">当塾はオンラインで授業をしているため、店舗などの固定費がかからないため安価で質の高い授業を提供できます。</div>
+        </details>
+        <details class="faq-item reveal delay-4">
+          <summary class="faq-question">
+            宿題はどのくらい出ますか？
+            <span class="faq-icon">+</span>
+          </summary>
+          <div class="faq-answer">当塾は量より質を重視します。その時々に本当に必要なスキルのみを重点的に宿題とします。また、座学のみの宿題ではなく、街中の様子や日常生活の中でも必要なスキルが身に付く宿題も出しております。</div>
+        </details>
+        <details class="faq-item reveal delay-1">
+          <summary class="faq-question">
+            オンラインだとしっかりやるか心配です。
+            <span class="faq-icon">+</span>
+          </summary>
+          <div class="faq-answer">当塾の指導方針が、できない原因から改善することなため、問題を本質的に理解することができオンラインでもみなさま結果を残されております。</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <img src="logo.png" alt="Breakthrough" class="footer-logo">
+      <div class="footer-links">
+        <a href="#problem">なぜ伸びないのか</a>
+        <a href="#about">指導の特徴</a>
+        <a href="#price">料金</a>
+        <a href="#faq">FAQ</a>
+        <a href="partner.html">提携先について</a>
+      </div>
+      <p class="footer-copy">© 2025 Breakthrough | 分析型英語個別指導</p>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    const header = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const navDrawer = document.getElementById('navDrawer');
+    hamburger.addEventListener('click', () => {
+      const isOpen = navDrawer.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    // Close drawer on link click
+    navDrawer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navDrawer.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

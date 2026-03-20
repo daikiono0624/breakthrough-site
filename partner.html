@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>提携先について | Breakthrough</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy-1: #071a33;
+      --navy-2: #0d2d57;
+      --navy-3: #173c6d;
+      --gold: #c9a84c;
+      --accent: #3569c8;
+      --bg: #f5f7fa;
+      --bg-soft: #eef2f8;
+      --white: #ffffff;
+      --text: #1a2e42;
+      --muted: #5a6e82;
+      --line: rgba(18, 46, 79, 0.1);
+      --shadow: 0 4px 20px rgba(8, 22, 42, 0.08);
+      --shadow-md: 0 8px 32px rgba(8, 22, 42, 0.12);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --green: #2e7d52;
+      --green-light: #e8f5ee;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Noto Sans JP", "Hiragino Sans", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    @media (min-width: 768px) { .container { max-width: 760px; } }
+    @media (min-width: 1100px) { .container { max-width: 900px; } }
+
+    /* ===== Header ===== */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: rgba(7, 26, 51, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 12px;
+    }
+    .brand { display: flex; align-items: center; }
+    .brand-logo { height: 36px; width: auto; }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 38px;
+      padding: 0 16px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.82rem;
+      border-radius: 6px;
+      transition: 0.2s;
+      white-space: nowrap;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.14); }
+
+    /* ===== Page Hero ===== */
+    .page-hero {
+      padding-top: 64px;
+      background: linear-gradient(160deg, #071a33 0%, #0d2d57 60%, #173c6d 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .page-hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 56px 0 52px;
+    }
+    .page-eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 0.26em;
+      font-weight: 700;
+    }
+    .page-title {
+      font-family: "Noto Serif JP", serif;
+      font-size: clamp(1.6rem, 5.5vw, 2.6rem);
+      color: rgba(255,255,255,0.96);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .page-subtitle {
+      color: rgba(255,255,255,0.68);
+      font-size: 0.92rem;
+      line-height: 1.9;
+    }
+
+    /* ===== Content ===== */
+    .section { padding: 64px 0; }
+    .section-white { background: #fff; }
+    .section-soft { background: var(--bg-soft); }
+
+    /* ===== Partner Card ===== */
+    .partner-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    .partner-card-header {
+      background: linear-gradient(135deg, #1a4d2e, #2e7d52);
+      padding: 28px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .partner-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+    .partner-header-text h2 {
+      font-family: "Noto Serif JP", serif;
+      font-size: 1.35rem;
+      color: #fff;
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+    .partner-header-text p {
+      color: rgba(255,255,255,0.72);
+      font-size: 0.82rem;
+    }
+    .partner-card-body {
+      padding: 28px 24px;
+    }
+    .partner-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .partner-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: var(--green-light);
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .partner-description {
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 2;
+      margin-bottom: 24px;
+    }
+    .partner-url-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+    }
+    .partner-url-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .partner-url-link {
+      color: var(--accent);
+      font-size: 0.88rem;
+      word-break: break-all;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .partner-url-link:hover { color: #1d4fa0; text-decoration: underline; }
+    .partner-visit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 24px;
+      background: var(--green);
+      color: #fff;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      transition: 0.2s;
+      box-shadow: 0 4px 16px rgba(46,125,82,0.25);
+    }
+    .partner-visit-btn:hover { background: #1a5c3a; transform: translateY(-2px); }
+
+    /* ===== Partnership Details ===== */
+    .partnership-section { padding: 48px 0; }
+    .section-kicker {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .section-title {
+      font-family: "Noto Serif JP", serif;
+      font-size: clamp(1.4rem, 4.5vw, 2rem);
+      color: #132d4a;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .section-lead {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.9;
+      margin-bottom: 32px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 600px) {
+      .detail-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .detail-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 22px 20px;
+      box-shadow: var(--shadow);
+    }
+    .detail-icon {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+    .detail-card h3 {
+      font-size: 1rem;
+      color: #193553;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+    .detail-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    /* ===== About みんなの教室 ===== */
+    .about-minnano {
+      background: linear-gradient(160deg, #1a4d2e, #2e7d52);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      color: #fff;
+      margin-bottom: 0;
+    }
+    .about-minnano h3 {
+      font-family: "Noto Serif JP", serif;
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+      color: rgba(255,255,255,0.95);
+    }
+    .about-minnano p {
+      font-size: 0.9rem;
+      line-height: 2;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 20px;
+    }
+    .about-minnano p:last-of-type { margin-bottom: 0; }
+    .minnano-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .minnano-feature {
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.88);
+      font-size: 0.8rem;
+    }
+
+    /* ===== CTA ===== */
+    .cta-box {
+      background: linear-gradient(160deg, #071a33, #0d2d57);
+      border-radius: var(--radius);
+      padding: 36px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .cta-box-inner { position: relative; z-index: 1; }
+    .cta-box h3 {
+      font-family: "Noto Serif JP", serif;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.95);
+      margin-bottom: 10px;
+      line-height: 1.55;
+    }
+    .cta-box p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.88rem;
+      margin-bottom: 24px;
+      line-height: 1.9;
+    }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--gold);
+      color: var(--navy-1);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: 0.2s;
+      box-shadow: 0 6px 20px rgba(201,168,76,0.3);
+    }
+    .cta-btn:hover { background: #b8922e; transform: translateY(-2px); }
+
+    /* ===== Footer ===== */
+    .site-footer {
+      background: #071a33;
+      color: rgba(255,255,255,0.65);
+      padding: 28px 0;
+      font-size: 0.82rem;
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .footer-logo { height: 26px; width: auto; opacity: 0.8; }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.9); }
+    .footer-copy { color: rgba(255,255,255,0.3); font-size: 0.75rem; }
+
+    /* ===== Reveal ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.08s; }
+    .delay-2 { transition-delay: 0.16s; }
+    .delay-3 { transition-delay: 0.24s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Breakthrough トップへ">
+        <img src="logo.png" alt="Breakthroughロゴ" class="brand-logo">
+      </a>
+      <a href="index.html" class="back-btn">
+        ← トップページへ戻る
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== Page Hero ===== -->
+  <div class="page-hero">
+    <div class="container page-hero-inner">
+      <span class="page-eyebrow">PARTNERSHIP</span>
+      <h1 class="page-title">提携先について</h1>
+      <p class="page-subtitle">Breakthroughが信頼を寄せる提携先をご紹介します。</p>
+    </div>
+  </div>
+
+  <!-- ===== Partner Main Card ===== -->
+  <section class="section section-white">
+    <div class="container">
+      <div class="partner-card reveal">
+        <div class="partner-card-header">
+          <div class="partner-icon">🏫</div>
+          <div class="partner-header-text">
+            <h2>特定非営利活動法人<br>みんなの教室</h2>
+            <p>大分県別府市フリースクール</p>
+          </div>
+        </div>
+        <div class="partner-card-body">
+          <div class="partner-badge-row">
+            <span class="partner-tag">フリースクール</span>
+            <span class="partner-tag">NPO法人</span>
+            <span class="partner-tag">大分県別府市</span>
+            <span class="partner-tag">子どもの居場所</span>
+          </div>
+          <p class="partner-description">
+            「みんなの教室」は、大分県別府市にある特定非営利活動法人が運営するフリースクールです。「子どもたちの居場所をつくる」ことと「子どもたち一人ひとりに寄り添い一緒に学び成長する」ことを教育理念としています。<br><br>
+            得意を伸ばしたい子、目標を達成したい子、学校の勉強についていけず困っている子、放課後一人で家にいる子など、様々な子どもたちに寄り添い、一緒に考え、チャレンジしていく場所です。<br><br>
+            Breakthroughは、みんなの教室と提携することで、英語学習のサポートを必要とする子どもたちにより充実した支援を届けることを目指しています。
+          </p>
+          <div class="partner-url-box">
+            <span class="partner-url-label">公式サイト</span>
+            <a href="https://www.minnanokyoushitsu.com/" target="_blank" rel="noopener noreferrer" class="partner-url-link">
+              https://www.minnanokyoushitsu.com/
+            </a>
+          </div>
+          <a href="https://www.minnanokyoushitsu.com/" target="_blank" rel="noopener noreferrer" class="partner-visit-btn">
+            みんなの教室の公式サイトへ →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== About みんなの教室 ===== -->
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-kicker">ABOUT</span>
+        <h2 class="section-title">みんなの教室について</h2>
+        <p class="section-lead">みんなの教室は、子どもたちが自分らしく学べる場所を提供しています。</p>
+      </div>
+      <div class="about-minnano reveal delay-1">
+        <h3>子どもたちの「好き」を軸にした学びの場</h3>
+        <p>
+          みんなの教室では、子どもたちが自分の「好きなこと」「やりたいこと」を軸にして、進んで活動にチャレンジしていっています。フリースペース・各種クラス・こども食堂・家庭サポートなど、多彩なプログラムを提供しています。
+        </p>
+        <p>
+          教育委員会や学校とも連携しており、安心して通える居場所として地域に根ざした活動を続けています。受験や英検対策も可能な家庭サポートも行っています。
+        </p>
+        <div class="minnano-features">
+          <span class="minnano-feature">フリースペース</span>
+          <span class="minnano-feature">各種クラス</span>
+          <span class="minnano-feature">こども食堂</span>
+          <span class="minnano-feature">家庭サポート</span>
+          <span class="minnano-feature">英検対策</span>
+          <span class="minnano-feature">受験対策</span>
+          <span class="minnano-feature">教育委員会連携</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Partnership Details ===== -->
+  <section class="section section-white">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-kicker">PARTNERSHIP</span>
+        <h2 class="section-title">提携の内容</h2>
+        <p class="section-lead">Breakthroughとみんなの教室が連携することで、子どもたちにより充実した学習環境を提供します。</p>
+      </div>
+      <div class="detail-grid">
+        <div class="detail-card reveal delay-1">
+          <div class="detail-icon">📚</div>
+          <h3>英語学習のサポート</h3>
+          <p>みんなの教室に通う子どもたちへの英語学習サポートを、Breakthroughが担当します。</p>
+        </div>
+        <div class="detail-card reveal delay-2">
+          <div class="detail-icon">🔍</div>
+          <h3>苦手分析の提供</h3>
+          <p>Breakthroughの得意とする「苦手の原因を分析する」アプローチで、一人ひとりに合った指導を行います。</p>
+        </div>
+        <div class="detail-card reveal delay-3">
+          <div class="detail-icon">🤝</div>
+          <h3>居場所と学びの連携</h3>
+          <p>みんなの教室が提供する「安心できる居場所」と、Breakthroughの「質の高い英語指導」を組み合わせます。</p>
+        </div>
+        <div class="detail-card reveal delay-1">
+          <div class="detail-icon">🎯</div>
+          <h3>英検・受験対策</h3>
+          <p>英検取得や高校受験を目指す子どもたちに向けた、目標に合わせた個別サポートを提供します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="section section-soft">
+    <div class="container">
+      <div class="cta-box reveal">
+        <div class="cta-box-inner">
+          <h3>Breakthroughの無料体験を<br>試してみませんか？</h3>
+          <p>60分の無料体験で、お子さんの英語の苦手の原因を一緒に分析します。<br>まずはお気軽にご相談ください。</p>
+          <a href="index.html#trial" class="cta-btn">無料体験を申し込む →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <img src="logo.png" alt="Breakthrough" class="footer-logo">
+      <div class="footer-links">
+        <a href="index.html">トップページ</a>
+        <a href="index.html#about">指導の特徴</a>
+        <a href="index.html#price">料金</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="partner.html">提携先について</a>
+      </div>
+      <p class="footer-copy">© 2025 Breakthrough | 分析型英語個別指導</p>
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
