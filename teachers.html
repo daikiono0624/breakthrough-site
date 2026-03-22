@@ -161,19 +161,14 @@
       border: 1px solid var(--line);
       display: flex;
       flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .teacher-image-placeholder {
-      width: 100%;
-      aspect-ratio: 4/3;
-      background: var(--bg-soft);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      font-size: 3rem;
+    .teacher-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
     }
     .teacher-info {
-      padding: 24px;
+      padding: 32px;
       flex-grow: 1;
     }
     .teacher-tag {
@@ -184,25 +179,28 @@
       font-size: 0.75rem;
       font-weight: 700;
       border-radius: 999px;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
     .teacher-name {
       font-family: "Noto Serif JP", serif;
-      font-size: 1.25rem;
+      font-size: 1.4rem;
       color: var(--navy-1);
       margin-bottom: 8px;
     }
     .teacher-title {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--muted);
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       font-weight: 500;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+      padding-bottom: 4px;
     }
     .teacher-bio {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--text);
-      line-height: 1.8;
-      margin-bottom: 20px;
+      line-height: 1.9;
+      margin-bottom: 24px;
     }
     .teacher-stats {
       display: flex;
@@ -210,12 +208,13 @@
       gap: 8px;
     }
     .stat-badge {
-      padding: 5px 10px;
+      padding: 6px 12px;
       background: #f0f4f8;
       border: 1px solid #d0e0f0;
-      border-radius: 4px;
-      font-size: 0.75rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
       color: var(--navy-2);
+      font-weight: 500;
     }
 
     /* ===== APU Section ===== */
@@ -338,7 +337,6 @@
         
         <!-- Type 1: APU -->
         <div class="teacher-card reveal">
-          <div class="teacher-image-placeholder">🎓</div>
           <div class="teacher-info">
             <span class="teacher-tag">APU在学生</span>
             <h3 class="teacher-name">グローバル・リーダー</h3>
@@ -356,7 +354,6 @@
 
         <!-- Type 2: Ritsumeikan -->
         <div class="teacher-card reveal">
-          <div class="teacher-image-placeholder">📝</div>
           <div class="teacher-info">
             <span class="teacher-tag">立命館大学在学生</span>
             <h3 class="teacher-name">受験戦略のプロ</h3>
@@ -374,7 +371,6 @@
 
         <!-- Type 3: International / N1 -->
         <div class="teacher-card reveal">
-          <div class="teacher-image-placeholder">🌍</div>
           <div class="teacher-info">
             <span class="teacher-tag">N1取得留学生</span>
             <h3 class="teacher-name">マルチリンガル講師</h3>
@@ -392,7 +388,6 @@
 
         <!-- Type 4: Specialist -->
         <div class="teacher-card reveal">
-          <div class="teacher-image-placeholder">🏆</div>
           <div class="teacher-info">
             <span class="teacher-tag">資格取得スペシャリスト</span>
             <h3 class="teacher-name">資格対策スペシャリスト</h3>
