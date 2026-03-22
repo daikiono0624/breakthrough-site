@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>教師紹介 | Breakthrough</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy-1: #071a33;
+      --navy-2: #0d2d57;
+      --navy-3: #173c6d;
+      --gold: #c9a84c;
+      --accent: #3569c8;
+      --bg: #f5f7fa;
+      --bg-soft: #eef2f8;
+      --white: #ffffff;
+      --text: #1a2e42;
+      --muted: #5a6e82;
+      --line: rgba(18, 46, 79, 0.1);
+      --shadow: 0 4px 20px rgba(8, 22, 42, 0.08);
+      --shadow-md: 0 8px 32px rgba(8, 22, 42, 0.12);
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Noto Sans JP", "Hiragino Sans", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    @media (min-width: 768px) { .container { max-width: 760px; } }
+    @media (min-width: 1100px) { .container { max-width: 1000px; } }
+
+    /* ===== Header ===== */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: rgba(7, 26, 51, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 12px;
+    }
+    .brand { display: flex; align-items: center; }
+    .brand-logo { height: 36px; width: auto; }
+    
+    .nav-desktop {
+      display: none;
+      gap: 20px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.8);
+    }
+    @media (min-width: 900px) { .nav-desktop { display: flex; } }
+    .nav-desktop a:hover { color: #fff; }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 34px;
+      padding: 0 12px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.75rem;
+      border-radius: 6px;
+      transition: 0.2s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.14); }
+
+    /* ===== Page Hero ===== */
+    .page-hero {
+      padding-top: 64px;
+      background: linear-gradient(160deg, #071a33 0%, #0d2d57 60%, #173c6d 100%);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .page-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .page-hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 60px 0 50px;
+    }
+    .page-eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 0.26em;
+      font-weight: 700;
+    }
+    .page-title {
+      font-family: "Noto Serif JP", serif;
+      font-size: clamp(1.8rem, 6vw, 2.8rem);
+      color: rgba(255,255,255,0.96);
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+    .page-lead {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.95rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* ===== Teacher Section ===== */
+    .section { padding: 80px 0; }
+    .section-title {
+      font-family: "Noto Serif JP", serif;
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 50px;
+      color: var(--navy-1);
+    }
+
+    .teacher-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    @media (min-width: 768px) {
+      .teacher-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .teacher-card {
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+    }
+    .teacher-image-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--bg-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 3rem;
+    }
+    .teacher-info {
+      padding: 24px;
+      flex-grow: 1;
+    }
+    .teacher-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--bg-soft);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    .teacher-name {
+      font-family: "Noto Serif JP", serif;
+      font-size: 1.25rem;
+      color: var(--navy-1);
+      margin-bottom: 8px;
+    }
+    .teacher-title {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+    .teacher-bio {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .teacher-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .stat-badge {
+      padding: 5px 10px;
+      background: #f0f4f8;
+      border: 1px solid #d0e0f0;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      color: var(--navy-2);
+    }
+
+    /* ===== APU Section ===== */
+    .apu-highlight {
+      background: var(--navy-1);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 40px;
+      margin-top: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .apu-highlight::after {
+      content: "APU";
+      position: absolute;
+      right: -20px;
+      bottom: -20px;
+      font-size: 8rem;
+      font-weight: 900;
+      color: rgba(255,255,255,0.03);
+    }
+    .apu-content h3 {
+      font-family: "Noto Serif JP", serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .apu-content p {
+      font-size: 0.95rem;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      background: var(--bg-soft);
+      padding: 80px 0;
+      text-align: center;
+    }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      background: var(--gold);
+      color: var(--navy-1);
+      font-weight: 700;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(201,168,76,0.3);
+      transition: 0.2s;
+    }
+    .cta-btn:hover { transform: translateY(-2px); background: #b8922e; }
+
+    /* ===== Footer ===== */
+    .site-footer {
+      background: #071a33;
+      color: rgba(255,255,255,0.65);
+      padding: 40px 0;
+      font-size: 0.82rem;
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .footer-links a { color: rgba(255,255,255,0.5); }
+    .footer-links a:hover { color: #fff; }
+
+    /* ===== Reveal ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: 0.6s ease-out;
+    }
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <img src="logo.png" alt="Breakthrough" class="brand-logo">
+      </a>
+      <nav class="nav-desktop">
+        <a href="index.html">トップ</a>
+        <a href="index.html#about">指導の特徴</a>
+        <a href="teachers.html" style="color:var(--gold); font-weight:700;">教師紹介</a>
+        <a href="index.html#price">料金</a>
+        <a href="partner.html">提携先について</a>
+      </nav>
+      <a href="index.html" class="back-btn">← 戻る</a>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container page-hero-inner">
+      <span class="page-eyebrow">OUR TEACHERS</span>
+      <h1 class="page-title">未来を切り拓く、<br>最高の伴走者たち。</h1>
+      <p class="page-lead">
+        Breakthroughの講師陣は、単に英語を教えるだけではありません。<br>
+        自らも高い目標に挑戦し続ける現役大学生や、国際的なバックグラウンドを持つプロフェッショナルが、お子様の「できる」を全力でサポートします。
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">講師ラインナップ</h2>
+      
+      <div class="teacher-grid">
+        
+        <!-- Teacher 1: APU -->
+        <div class="teacher-card reveal">
+          <div class="teacher-image-placeholder">🎓</div>
+          <div class="teacher-info">
+            <span class="teacher-tag">APU在学生</span>
+            <h3 class="teacher-name">K. Tanaka</h3>
+            <p class="teacher-title">立命館アジア太平洋大学 (APU) 国際経営学部</p>
+            <p class="teacher-bio">
+              世界90カ国以上の学生が集まるAPUで、日々英語での議論やプロジェクトに携わっています。実践的な英語の楽しさと、日本人がつまずきやすいポイントを熟知した丁寧な指導が持ち味です。
+            </p>
+            <div class="teacher-stats">
+              <span class="stat-badge">TOEIC 920点</span>
+              <span class="stat-badge">英検準1級</span>
+              <span class="stat-badge">海外留学経験あり</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Teacher 2: Ritsumeikan -->
+        <div class="teacher-card reveal">
+          <div class="teacher-image-placeholder">📝</div>
+          <div class="teacher-info">
+            <span class="teacher-tag">立命館大学在学生</span>
+            <h3 class="teacher-name">S. Sato</h3>
+            <p class="teacher-title">立命館大学 文学部</p>
+            <p class="teacher-bio">
+              受験英語の戦略的な学習法に精通しています。「なぜこの答えになるのか」という論理的な解説により、多くの生徒の偏差値を短期間で引き上げてきた実績があります。
+            </p>
+            <div class="teacher-stats">
+              <span class="stat-badge">大学受験英語特化</span>
+              <span class="stat-badge">英検指導実績多数</span>
+              <span class="stat-badge">論理的思考指導</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Teacher 3: International / N1 -->
+        <div class="teacher-card reveal">
+          <div class="teacher-image-placeholder">🌍</div>
+          <div class="teacher-info">
+            <span class="teacher-tag">N1取得留学生</span>
+            <h3 class="teacher-name">A. Rahman</h3>
+            <p class="teacher-title">日本語能力試験(JLPT) N1保持 / 英語ネイティブレベル</p>
+            <p class="teacher-bio">
+              母国語、英語、そして日本語の3ヶ国語を操るマルチリンガル。言語習得の苦労を知っているからこそ、生徒の「分からない」に寄り添い、多角的な視点から英語の構造を教えます。
+            </p>
+            <div class="teacher-stats">
+              <span class="stat-badge">JLPT N1</span>
+              <span class="stat-badge">多言語学習プロ</span>
+              <span class="stat-badge">異文化理解</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Teacher 4: Specialist -->
+        <div class="teacher-card reveal">
+          <div class="teacher-image-placeholder">🏆</div>
+          <div class="teacher-info">
+            <span class="teacher-tag">資格取得スペシャリスト</span>
+            <h3 class="teacher-name">M. Suzuki</h3>
+            <p class="teacher-title">英語資格試験対策 専門講師</p>
+            <p class="teacher-bio">
+              英検やTOEICなどの資格試験において、最短ルートで合格を勝ち取るためのテクニックを伝授します。分析型指導により、生徒一人ひとりの弱点を正確に射抜きます。
+            </p>
+            <div class="teacher-stats">
+              <span class="stat-badge">英検1級</span>
+              <span class="stat-badge">TOEIC 990点満点</span>
+              <span class="stat-badge">分析指導のプロ</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- APU Highlight -->
+      <div class="apu-highlight reveal">
+        <div class="apu-content">
+          <h3>APU（立命館アジア太平洋大学）との関わり</h3>
+          <p>
+            Breakthroughは、大分県別府市にある国際大学「APU」の学生講師を積極的に採用しています。
+            APUは学生の半数が外国籍という、日本で最も国際的な環境の一つです。
+            そこで日常的に英語を使い、多様な価値観に触れている学生たちが講師を務めることで、
+            単なる「教科としての英語」を超えた、世界と繋がるための生きた英語を伝えています。
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2 style="margin-bottom:20px; font-family:'Noto Serif JP', serif;">この先生たちと一緒に、<br>英語の壁を突破しませんか？</h2>
+      <p style="margin-bottom:30px; color:var(--muted);">まずは60分の無料体験で、相性を確かめてみてください。</p>
+      <a href="https://lin.ee/QMMFWYf" class="cta-btn">
+        公式LINEで無料体験を申し込む
+      </a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p style="color:#fff; font-weight:700; font-size:1rem;">Breakthrough</p>
+      <div class="footer-links">
+        <a href="index.html">トップ</a>
+        <a href="index.html#about">指導の特徴</a>
+        <a href="teachers.html">教師紹介</a>
+        <a href="index.html#price">料金</a>
+        <a href="partner.html">提携先について</a>
+      </div>
+      <p style="color:rgba(255,255,255,0.3); margin-top:10px;">© 2025 Breakthrough | 分析型英語個別指導</p>
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
